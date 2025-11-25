@@ -98,6 +98,25 @@
             gap: 10px;
         }
 
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-main {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo-sub {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
         .nav-menu {
             display: flex;
             list-style: none;
@@ -146,6 +165,49 @@
             background-color: var(--primary-color);
             border-color: var(--primary-color);
             color: white;
+            transform: rotate(180deg);
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float svg {
+            width: 35px;
+            height: 35px;
+            fill: white;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 25px rgba(37, 211, 102, 0.7);
+            }
+            100% {
+                box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            }
         }
 
         .mobile-toggle {
@@ -277,6 +339,26 @@
         .stat-item {
             text-align: center;
             animation: fadeIn 1s ease-out;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: scale(1.1);
+        }
+
+        .stat-item:hover .stat-number {
+            animation: countUp 0.5s ease-out;
+        }
+
+        @keyframes countUp {
+            from {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         @keyframes fadeIn {
@@ -289,6 +371,7 @@
             font-weight: bold;
             color: var(--primary-color);
             margin-bottom: 10px;
+            transition: all 0.3s ease;
         }
 
         .stat-label {
@@ -336,13 +419,30 @@
             border-radius: 10px;
             padding: 30px;
             border: 1px solid var(--border-color);
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .program-card:hover::before {
+            left: 100%;
         }
 
         .program-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
             border-color: var(--primary-color);
         }
 
@@ -357,6 +457,12 @@
             color: white;
             font-size: 30px;
             margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .program-card:hover .program-icon {
+            transform: rotateY(360deg);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
         }
 
         .program-card h3 {
@@ -378,10 +484,12 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
+            transition: all 0.3s ease;
         }
 
         .program-link:hover {
             gap: 10px;
+            transform: translateX(5px);
         }
 
         /* Research Section */
@@ -421,6 +529,32 @@
             justify-content: center;
             color: white;
             font-size: 80px;
+            position: relative;
+            overflow: hidden;
+            animation: gradient 3s ease infinite;
+        }
+
+        .research-image::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes gradient {
+            0%, 100% {
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            }
+            50% {
+                background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         /* News Section */
@@ -445,12 +579,29 @@
             border-radius: 10px;
             overflow: hidden;
             border: 1px solid var(--border-color);
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .news-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(239, 68, 68, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .news-card:hover::after {
+            opacity: 1;
         }
 
         .news-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
 
         .news-image {
@@ -462,6 +613,11 @@
             justify-content: center;
             color: white;
             font-size: 60px;
+            transition: transform 0.4s ease;
+        }
+
+        .news-card:hover .news-image {
+            transform: scale(1.1);
         }
 
         .news-content {
@@ -617,7 +773,11 @@
     <nav>
         <div class="container">
             <div class="logo">
-                🎓 DSU
+                <div style="font-size: 32px;">🎓</div>
+                <div class="logo-text">
+                    <span class="logo-main">DAYANANDA SAGAR UNIVERSITY</span>
+                    <span class="logo-sub">Bengaluru, Karnataka</span>
+                </div>
             </div>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#about">About</a></li>
@@ -819,6 +979,17 @@
             <p>&copy; 2025 Dayananda Sagar University. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/918012345678?text=Hi,%20I%20would%20like%20to%20know%20more%20about%20admissions" 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       aria-label="Contact us on WhatsApp">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 8.135-2.135c2.369 1.228 5.018 1.875 7.865 1.875 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.333c-2.547 0-5.043-0.716-7.193-2.067l-0.515-0.302-5.328 1.397 1.423-5.289-0.335-0.534c-1.488-2.366-2.277-5.102-2.277-7.871 0-7.364 5.991-13.355 13.355-13.355s13.355 5.991 13.355 13.355c0 7.364-5.991 13.355-13.355 13.355zM22.107 18.965c-0.368-0.184-2.183-1.078-2.525-1.201s-0.585-0.184-0.831 0.184c-0.245 0.368-0.954 1.201-1.169 1.447s-0.43 0.276-0.798 0.092c-0.368-0.184-1.554-0.573-2.959-1.826-1.094-0.975-1.833-2.178-2.048-2.546s-0.023-0.566 0.161-0.749c0.166-0.165 0.368-0.43 0.552-0.645s0.245-0.368 0.368-0.614 0.061-0.46-0.031-0.645c-0.092-0.184-0.831-2.001-1.138-2.743-0.299-0.723-0.603-0.625-0.831-0.637-0.215-0.010-0.46-0.012-0.706-0.012s-0.645 0.092-0.983 0.46c-0.338 0.368-1.293 1.263-1.293 3.079s1.324 3.571 1.508 3.817c0.184 0.245 2.599 3.967 6.297 5.563 0.88 0.38 1.566 0.607 2.101 0.777 0.885 0.281 1.69 0.241 2.327 0.146 0.71-0.106 2.183-0.892 2.491-1.753s0.307-1.599 0.215-1.753c-0.092-0.154-0.338-0.245-0.706-0.43z"/>
+        </svg>
+    </a>
 
     <script>
         // Theme Toggle
